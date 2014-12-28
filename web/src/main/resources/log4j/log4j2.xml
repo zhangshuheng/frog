@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration name="FROG" packages="com.frog">
+    <appenders>
+<!--      	每次大小超过size，则这size大小的日志会重新生成一个新文件，并加上日期和序号做为后缀 -->
+        <RollingFile name="RollingFile" fileName="/tmp/app.log" 
+                     filePattern="/tmp/app-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout pattern="{yyyy-MM-dd}%msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="100MB"/>
+        </RollingFile>
+<!--         <Flume name="flumeLogger" compress="false"> -->
+<!--       		<Agent host="localhost" port="44444"/> -->
+<!--       		<RFC5424Layout enterpriseNumber="18060" includeMDC="true" appName="app"/> -->
+<!--     	</Flume> -->
+    </appenders>
+    
+    <loggers>
+<!--         建立一个默认的root的logger -->
+        <root level="TRACE">
+            <appender-ref ref="RollingFile"/>
+        </root>
+<!--         <root level="trace"> -->
+<!--             <AppenderRef ref="flumeLogger"/> -->
+<!--         </root> -->
+        <logger name="rollingFile" level="TRACE">
+        	
+            <Appender-ref ref="RollingFile"/>
+        </logger>
+    </loggers>
+</configuration>
